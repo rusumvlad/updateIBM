@@ -1,7 +1,6 @@
 package com.example.service.function;
 
 import com.example.persistance.entity.Exam;
-import com.example.persistance.entity.Login;
 import com.example.persistance.entity.Students;
 import com.example.persistance.repository.ExamRepository;
 import com.example.persistance.repository.StudentsRepository;
