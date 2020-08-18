@@ -10,14 +10,9 @@ import { FaChair, FaSchool } from 'react-icons/fa';
 import { AiFillCalendar } from 'react-icons/ai';
 import { CurrentUserContext } from '../LoginContext';
 
-import { adder } from '../Constants/APIHandler'
-
-
-
+import ApiServices from '../Constants/APIHandler'
 
 function FormProfessor() {
-
-  const ADD_EXAM_API = 'http://localhost:9191/addExam'
 
   const [currentUser] = useContext(CurrentUserContext);
   const [yearOfStudy, setYearOfStudy] = useState('');
@@ -42,7 +37,6 @@ function FormProfessor() {
     let stringsOnly = /^[A-Za-z]+$/;
     return stringsOnly.test(strings);
   }
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -71,7 +65,7 @@ function FormProfessor() {
 
         } else {
           setErrorNumber(false);
-          adder(ADD_EXAM_API, exam)
+          ApiServices.addExam(exam)
             .then(() => {
               setShow(true);
 

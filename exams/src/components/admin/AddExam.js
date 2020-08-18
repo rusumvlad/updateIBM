@@ -14,13 +14,10 @@ import { GoPerson, GoCalendar } from 'react-icons/go';
 import { FaChair, FaSchool } from 'react-icons/fa';
 import { AiFillCalendar } from 'react-icons/ai';
 
+import ApiServices from '../Constants/APIHandler';
 
-import { getter, adder } from '../Constants/APIHandler'
 
 export default function AddExam() {
-
-  const ADD_API = 'http://localhost:9191/addExam'
-  const EXAM_API = `http://localhost:9191/exams`
 
   const [, setExams] = useContext(ExamsContext);
   const [yearOfStudy, setYearOfStudy] = useState('');
@@ -72,12 +69,13 @@ export default function AddExam() {
 
         } else {
           setErrorNumber(false);
-          adder(ADD_API, exam)
+          ApiServices.addExam(exam)
             .then(() => {
               setShow(true);
-              getter(EXAM_API).then(res => {
-                setExams(res.data);
-              })
+              ApiServices.getExams()
+                .then(res => {
+                  setExams(res.data);
+                })
 
             })
           setYearOfStudy('');

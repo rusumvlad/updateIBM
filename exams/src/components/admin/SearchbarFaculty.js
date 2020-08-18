@@ -1,22 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ExamsContext } from '../ExamsContext';
 
-import { getter } from '../Constants/APIHandler'
-
-
-
+import ApiServices from '../Constants/APIHandler'
 
 export default function Searchbar() {
 
-    const EXAMS_API = 'http://localhost:9191/exams'
-    const EXAMS_API_FAC = `http://localhost:9191/students/`
-    const EXAMS_API_YEAR = `http://localhost:9191/students/exams/`
-
     const [, setExams] = useContext(ExamsContext);
     const [facultyI, setFacultyI] = useState('');
-
-
-
 
     function validareNumar(number) {
         let numbersOnly = /^[0-9\b]+$/;
@@ -30,17 +20,17 @@ export default function Searchbar() {
     useEffect(
         () => {
             if (facultyI === '') {
-                getter(EXAMS_API)
+                ApiServices.getExams()
                     .then(res => {
                         setExams(res.data);
                     })
             } else if (validareNumar(facultyI) === true) {
-                getter(EXAMS_API_YEAR + `${facultyI}`)
+                ApiServices.filterYearOfStudy(facultyI)
                     .then(res => {
                         setExams(res.data);
                     })
             } else if (validareString(facultyI) === true) {
-                getter(EXAMS_API_FAC + `${facultyI}`)
+                ApiServices.filterFaculty(facultyI)
                     .then(res => {
                         setExams(res.data);
                     })

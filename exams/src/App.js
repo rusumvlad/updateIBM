@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import FormLogin from './components/FormLogin';
 import PageProfesor from './components/professor/pageProfesor';
 import PageStudent from './components/student/pageStudent';
-import PageAdmin from './components/admin/pageAdmin';
+import PageAdmin from './components/admin/PageAdmin';
 //Import Contexts
 import { ExamsProvider } from './components/ExamsContext';
 import { LoginProvider } from './components/LoginContext';

@@ -7,23 +7,17 @@ import ExamLayout from '../layouts/ExamLayout';
 //Import style for cards
 import '../../css/Admin.css';
 
-import { deleter } from '../Constants/APIHandler'
+import ApiServices from '../Constants/APIHandler'
 
 import AddExam from './AddExam'
 import Searchbar from './SearchbarFaculty';
 
 function HomeAdmin() {
 
-    const DELETE_API = `http://localhost:9191/deleteExam/`
-
     const [exams, setExams] = useContext(ExamsContext);
 
-
-
-
-
     function remove(id) {
-        deleter(DELETE_API + id)
+        ApiServices.removeExam(id)
             .then(res => {
                 setExams(exams.filter(ex => ex.id !== id))
             }

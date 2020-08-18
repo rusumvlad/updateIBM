@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-//Import Student Card component
-//import StudentCard from './StudentCard';
 
 //Import Icons
 import { FaEdit } from 'react-icons/fa';
@@ -13,14 +11,12 @@ import { MdBook } from 'react-icons/md';
 import { GoPerson, GoCalendar } from 'react-icons/go';
 import { FaChair, FaSchool } from 'react-icons/fa';
 
-import { putter, getter } from '../Constants/APIHandler'
 
 import Alert from 'react-bootstrap/Alert';
 
-export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, isProfessor, isStudent, removeExam, updateExam, status, isPend, updateStatus, nrLocuri, academicYear, semester, yearOfStudy, faculty }) {
+import ApiServices from '../Constants/APIHandler';
 
-  const UPDATE_API = `http://localhost:9191/updateExam/`
-  const EXAMS_API = 'http://localhost:9191/exams'
+export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, isProfessor, isStudent, removeExam, updateExam, status, isPend, updateStatus, nrLocuri, academicYear, semester, yearOfStudy, faculty }) {
 
   const [, setExams] = useContext(ExamsContext);
   const [YearOfStudy, setYearOfStudy] = useState(yearOfStudy);
@@ -114,13 +110,14 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
 
         } else {
           setErrorNumber(false);
-          putter(UPDATE_API + `${idExam}`, examUpdate)
+          ApiServices.updateExams(idExam, examUpdate)
             .then(() => {
               setShow(true);
-              getter(EXAMS_API).then(res => {
-                setExams(res.data);
-                console.log(res.data);
-              })
+              ApiServices.getExams()
+                .then(res => {
+                  setExams(res.data);
+                  console.log(res.data);
+                })
             })
 
           setEditing(false);
