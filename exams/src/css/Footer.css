@@ -1,0 +1,46 @@
+.footer-middle {
+    margin-top:2rem;
+    background: #3487d5;
+    padding-top: 1rem;
+    color: #f3f3f3;
+}
+
+.footer-bottom{
+    margin-top:2rem;
+    padding-top:1rem;
+    align-items: center;
+    background: #5895ce;
+}
+.list-items li{
+    font-size:1.1rem;
+    
+}
+.list-items li a{
+    font-size:1.1rem;
+    color:#f3f3f3;
+    text-decoration: none;
+}
+.icons-footer{
+    font-size:30px;
+    padding-right:5px;
+    padding-bottom: 5px;
+}
+.icons-retele{
+    margin-top:1rem;
+    font-size:35px;
+    padding-right:5px;
+    padding-bottom: 5px;
+}
+.icons-contact{
+    font-size:25px;
+    padding-right:3px;
+    padding-bottom: 3px;
+}
+.list-items li a:hover{
+    color:#083a69;
+}
+.light{
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-color: #fff;
+}

@@ -1,0 +1,41 @@
+/*Style for Request FORM */
+/* Form Design */
+.buttonProf
+{
+    
+        display:flex;
+        justify-content:center;
+        align-items:center;
+}
+
+.formDesign{
+    padding: 2rem;
+    border: 1px solid #bbbbbb;
+    border-radius:8px;
+    background-color: #3487d5;
+}
+
+.formDesign label{
+        color:#fff;
+        font-size:1.2rem;
+        font-weight: bold;
+    }
+
+.buttonDesign{
+        padding:10px;
+	outline: none;
+	border: none;
+        font-size: 1.2rem;
+        background-color: #63a9eb;
+	color: #fff;
+        text-transform: uppercase;
+        border-radius: 1rem;
+	
+}
+
+.form-icons{
+        font-size:1.6rem;
+        padding-bottom: 5px;
+        padding-right:5px;
+}
+/* End of form design */
