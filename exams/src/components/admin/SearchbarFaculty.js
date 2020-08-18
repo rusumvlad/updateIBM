@@ -28,6 +28,9 @@ export default function Searchbar() {
                 ApiServices.filterYearOfStudy(facultyI)
                     .then(res => {
                         setExams(res.data);
+                        if (res.data.length === 0) {
+                            console.log("Nu merge")
+                        }
                     })
             } else if (validareString(facultyI) === true) {
                 ApiServices.filterFaculty(facultyI)
