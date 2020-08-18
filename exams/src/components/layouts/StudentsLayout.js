@@ -16,6 +16,9 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function StudentsLayout({ name, faculty, yearOfStudy, removeStudent, studId }) {
 
+    const UPDATE_API = `http://localhost:9191/updateStudents/`
+    const LOGIN_API = 'http://localhost:9191/students'
+
     const [, setStudent] = useContext(StudentContext)
     const [isEditing, setEditing] = useState(false);
     const [Name, setName] = useState(name);
@@ -27,8 +30,6 @@ export default function StudentsLayout({ name, faculty, yearOfStudy, removeStude
     const [errorEmpty, setErrorEmpty] = useState(false);
     const [errorOption, setErrorOption] = useState(false);
 
-    const UPDATE_API = `http://localhost:9191/updateStudents/${studId}`
-    const LOGIN_API = 'http://localhost:9191/students'
     function handleEdit() {
         setEditing(!isEditing)
     }
@@ -54,7 +55,7 @@ export default function StudentsLayout({ name, faculty, yearOfStudy, removeStude
             }
             else {
                 setErrorOption(false);
-                putter(UPDATE_API, studentUpdate)
+                putter(UPDATE_API + `${studId}`, studentUpdate)
                     .then(() => {
                         setShow(true);
                         getter(LOGIN_API).then(res => {

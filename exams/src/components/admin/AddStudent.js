@@ -6,19 +6,17 @@ import { StudentContext } from '../LoginContext';
 import { Form, Container } from 'react-bootstrap'
 import Alert from 'react-bootstrap/Alert'
 
-
 import { adder, getter } from '../Constants/APIHandler'
 
-
-
 //Import Icons
-import { FaUserAlt, FaLock, FaUsers, FaSchool } from 'react-icons/fa';
+import { FaUserAlt, FaSchool } from 'react-icons/fa';
 import { AiFillCalendar } from 'react-icons/ai';
 
-const ADD_STUDENT_API = 'http://localhost:9191/addStudent'
-const STUDENT_API = `http://localhost:9191/students`
-
 export default function AddStudent() {
+
+    const ADD_STUDENT_API = 'http://localhost:9191/addStudent'
+    const STUDENT_API = `http://localhost:9191/students`
+
     const [student, setStudent] = useContext(StudentContext);
     const [name, setName] = useState('');
     const [faculty, setFaculty] = useState('');

@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { LoginContext } from '../LoginContext';
 import UsersLayout from '../layouts/UsersLayout';
 import AddUser from './AddUser';
-import axios from 'axios';
 
 import { deleter } from '../Constants/APIHandler'
 
-const DELETE_USER_API = 'http://localhost:9191/deleteUser/'
+
 
 export default function UsersList() {
+
+    const DELETE_USER_API = 'http://localhost:9191/deleteUser/'
+
     const [users, setUsers] = useContext(LoginContext);
 
     function removeUser(id) {
@@ -28,7 +30,7 @@ export default function UsersList() {
             </div>
             <div className="row">
                 {users.map((user, index) =>
-                    <UsersLayout username={user.username} password={user.password} usertype={user.usertype} removeUsers={() => removeUser(user.id)} key={index} userId = {user.id} />
+                    <UsersLayout username={user.username} password={user.password} usertype={user.usertype} removeUsers={() => removeUser(user.id)} key={index} userId={user.id} />
                 )}
             </div>
             <div className="row">

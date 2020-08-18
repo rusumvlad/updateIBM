@@ -4,7 +4,6 @@ import { ExamsContext } from '../ExamsContext'
 
 
 import { Form, Container } from 'react-bootstrap'
-import axios from 'axios';
 
 import Alert from 'react-bootstrap/Alert';
 
@@ -16,15 +15,13 @@ import { FaChair, FaSchool } from 'react-icons/fa';
 import { AiFillCalendar } from 'react-icons/ai';
 
 
-import { getter,adder } from '../Constants/APIHandler'
-
-
-const ADD_API = 'http://localhost:9191/addExam'
-const EXAM_API = `http://localhost:9191/exams`
-
-
+import { getter, adder } from '../Constants/APIHandler'
 
 export default function AddExam() {
+
+  const ADD_API = 'http://localhost:9191/addExam'
+  const EXAM_API = `http://localhost:9191/exams`
+
   const [, setExams] = useContext(ExamsContext);
   const [yearOfStudy, setYearOfStudy] = useState('');
   const [semester, setSemester] = useState('');
@@ -40,17 +37,6 @@ export default function AddExam() {
   const [errorEmpty, setErrorEmpty] = useState(false);
   const [errorString, setErrorString] = useState(false);
 
-  // const updateMaterie = (e) => {
-  //     setMaterie(e.target.value);
-  // }
-
-  // const updateData = (e) => {
-  //     setData(e.target.value);
-  // }
-
-  // const updateProfesor = (e) => {
-  //     setProfesor(e.target.value)
-
   function validareNumar(number) {
     let numbersOnly = /^[0-9\b]+$/;
     return numbersOnly.test(number);
@@ -61,16 +47,6 @@ export default function AddExam() {
   }
 
   const handleSubmit = (e) => {
-
-    // setExams(prevExams => [...prevExams, {
-    //     id: uuidv4(),
-    //     materie: materie,
-    //     data: data,
-    //     profesor: profesor,
-    //     status: 'acceptat'
-
-
-    // }])
     e.preventDefault();
     const exam = {
       date: date,
@@ -96,7 +72,7 @@ export default function AddExam() {
 
         } else {
           setErrorNumber(false);
-          adder(ADD_API,exam)
+          adder(ADD_API, exam)
             .then(() => {
               setShow(true);
               getter(EXAM_API).then(res => {
@@ -171,7 +147,7 @@ export default function AddExam() {
           </Form.Group>
 
           <Form.Group controlId="formBasicAcademicYear">
-            <Form.Label><GoPerson className="form-icons" />An academic</Form.Label>
+            <Form.Label><GoPerson className="form-icons" />Academic year</Form.Label>
             <Form.Control type="text" name='academicYear' value={academicYear} onChange={(e) => setAcademicYear(e.target.value)} />
           </Form.Group>
 

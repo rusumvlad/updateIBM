@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 //Import Admin Pages
 import HomeAdmin from './HomeAdmin'
 import UsersList from './UsersList';
+import StudentList from './StudentList';
 
 //Import Components layout and style
 import NavbarAdmin from '../layouts/NavbarAdmin'
@@ -13,7 +14,7 @@ import Footer from '../layouts/Footer';
 import '../../css/Navbar.css';
 import PenddingExams from './PendingExams';
 import * as ROUTES from '../Constants/routes'
-import StudentList from './StudentList';
+
 
 
 

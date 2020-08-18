@@ -13,11 +13,14 @@ import { MdBook } from 'react-icons/md';
 import { GoPerson, GoCalendar } from 'react-icons/go';
 import { FaChair, FaSchool } from 'react-icons/fa';
 
-import { putter,getter } from '../Constants/APIHandler'
+import { putter, getter } from '../Constants/APIHandler'
 
 import Alert from 'react-bootstrap/Alert';
 
 export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, isProfessor, isStudent, removeExam, updateExam, status, isPend, updateStatus, nrLocuri, academicYear, semester, yearOfStudy, faculty }) {
+
+  const UPDATE_API = `http://localhost:9191/updateExam/`
+  const EXAMS_API = 'http://localhost:9191/exams'
 
   const [, setExams] = useContext(ExamsContext);
   const [YearOfStudy, setYearOfStudy] = useState(yearOfStudy);
@@ -34,9 +37,7 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
   const [errorEmpty, setErrorEmpty] = useState(false);
   const [errorString, setErrorString] = useState(false);
 
-  const UPDATE_API = `http://localhost:9191/updateExam/${idExam}`
-
-  const EXAMS_API = 'http://localhost:9191/exams'
+  const [isEditing, setEditing] = useState(false);
 
   const buttons =
     (
@@ -63,7 +64,6 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
       <MdDelete className="icons-admin-card" onClick={removeExam}></MdDelete>
     </div>
   )
-  const [isEditing, setEditing] = useState(false);
 
 
 
@@ -114,7 +114,7 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
 
         } else {
           setErrorNumber(false);
-          putter(UPDATE_API,examUpdate)
+          putter(UPDATE_API + `${idExam}`, examUpdate)
             .then(() => {
               setShow(true);
               getter(EXAMS_API).then(res => {
@@ -135,17 +135,6 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
 
 
 
-  let adminFields = (
-    <div>
-      <h5>Semestrul: {semester}</h5>
-      <hr></hr>
-      <h5>An academic: {academicYear}</h5>
-      <hr></hr>
-      <h5>An de studiu: {yearOfStudy}</h5>
-      <hr></hr>
-      <h5>Facultatea: {faculty}</h5>
-    </div>
-  )
   let result;
   if (isEditing) {
     result = (
@@ -225,8 +214,16 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
           <h5>Data: {data}</h5>
           <hr />
           {(isProfessor || isAdmin) && <h5>Numarul de locuri: {nrLocuri}<hr /></h5>}
-          {(isStudent || isAdmin) && <div><h5>Profesor: {profesor}</h5><hr></hr></div>}
-          {(isAdmin && adminFields)}
+          {(isStudent || isAdmin) && <><h5>Profesor: {profesor}</h5><hr></hr></>}
+          {(isAdmin && <>
+            <h5>Semestrul: {semester}</h5>
+            <hr></hr>
+            <h5>An academic: {academicYear}</h5>
+            <hr></hr>
+            <h5>An de studiu: {yearOfStudy}</h5>
+            <hr></hr>
+            <h5>Facultatea: {faculty}</h5>
+          </>)}
 
 
           {isPend && statusW}

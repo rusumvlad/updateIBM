@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import axios from 'axios'
 //Import bootstrap components
 import { Form, Container } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
@@ -13,10 +12,12 @@ import { CurrentUserContext } from '../LoginContext';
 
 import { adder } from '../Constants/APIHandler'
 
-const ADD_EXAM_API = 'http://localhost:9191/addExam'
+
 
 
 function FormProfessor() {
+
+  const ADD_EXAM_API = 'http://localhost:9191/addExam'
 
   const [currentUser] = useContext(CurrentUserContext);
   const [yearOfStudy, setYearOfStudy] = useState('');
@@ -45,13 +46,6 @@ function FormProfessor() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setWExams(prevExams => [...prevExams, {
-    //   id: uuidv4(),
-    //   materie: course,
-    //   data: yearOfStudy,
-    //   profesor: teacher,
-    //   status: 'asteptare'
-    // }])
     const exam = {
       date: date,
       yearOfStudy: yearOfStudy,
@@ -77,7 +71,7 @@ function FormProfessor() {
 
         } else {
           setErrorNumber(false);
-          adder(ADD_EXAM_API,exam)
+          adder(ADD_EXAM_API, exam)
             .then(() => {
               setShow(true);
 
@@ -141,7 +135,7 @@ function FormProfessor() {
           </Form.Group>
 
           <Form.Group controlId="formBasicAcademicYear">
-            <Form.Label><GoPerson className="form-icons" />An academic</Form.Label>
+            <Form.Label><GoPerson className="form-icons" />Academic Year</Form.Label>
             <Form.Control
               type="text"
               name='academicYear'

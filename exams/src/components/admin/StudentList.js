@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import { StudentContext } from '../LoginContext';
-import UsersLayout from '../layouts/UsersLayout';
 
 import { deleter } from '../Constants/APIHandler'
 import AddStudent from './AddStudent';
 import StudentsLayout from '../layouts/StudentsLayout'
 
-const DELETE_USER_API = 'http://localhost:9191/deleteStudent/'
+
 
 
 export default function StudentList() {
+
+    const DELETE_USER_API = 'http://localhost:9191/deleteStudent/'
+
     const [student, setStudent] = useContext(StudentContext)
 
     function removeStudent(id) {

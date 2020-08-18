@@ -10,20 +10,16 @@ import '../../css/Admin.css';
 import { deleter } from '../Constants/APIHandler'
 
 import AddExam from './AddExam'
-import axios from 'axios'
 import Searchbar from './SearchbarFaculty';
-import SearchbarYear from './SearchbarYear';
-
-const DELETE_API = `http://localhost:9191/deleteExam/`
-
-
 
 function HomeAdmin() {
+
+    const DELETE_API = `http://localhost:9191/deleteExam/`
 
     const [exams, setExams] = useContext(ExamsContext);
 
 
-    
+
 
 
     function remove(id) {
@@ -34,7 +30,6 @@ function HomeAdmin() {
             )
     }
     function update(id) {
-        // setExams(exams.map((exam) => (exam.id === id ? updatedExam : exam)))
         console.log(id);
     }
 
@@ -45,9 +40,6 @@ function HomeAdmin() {
             </div>
             <div className="row mt-5">
                 <Searchbar />
-            </div>
-            <div className="row mt-5">
-                <SearchbarYear />
             </div>
             <div className="row mt-5">
                 {exams.map((exam, index) =>

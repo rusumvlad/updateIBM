@@ -5,16 +5,17 @@ import { FaEdit, FaLock, FaUserAlt, FaUsers } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import { LoginContext } from '../LoginContext';
 import { Form } from 'react-bootstrap'
-import { AiFillCalendar } from 'react-icons/ai';
 
 
 import { putter, getter } from '../Constants/APIHandler'
 
 import Alert from 'react-bootstrap/Alert';
-import axios from 'axios';
 
 
 export default function UsersLayout({ username, password, usertype, removeUsers, userId }) {
+
+  const UPDATE_API = `http://localhost:9191/updateUser/`
+  const LOGIN_API = 'http://localhost:9191/login/users'
 
   const [, setUser] = useContext(LoginContext)
   const [isEditing, setEditing] = useState(false);
@@ -27,8 +28,6 @@ export default function UsersLayout({ username, password, usertype, removeUsers,
   const [errorEmpty, setErrorEmpty] = useState(false);
   const [errorOption, setErrorOption] = useState(false);
 
-  const UPDATE_API = `http://localhost:9191/updateUser/${userId}`
-  const LOGIN_API = 'http://localhost:9191/login/users'
   function handleEdit() {
     setEditing(!isEditing)
   }
@@ -50,7 +49,7 @@ export default function UsersLayout({ username, password, usertype, removeUsers,
       }
       else {
         setErrorOption(false);
-        putter(UPDATE_API, userUpdate)
+        putter(UPDATE_API + `${userId}`, userUpdate)
           .then(() => {
             setShow(true);
             getter(LOGIN_API).then(res => {
