@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StudentContext } from '../LoginContext';
 
-import { deleter } from '../Constants/APIHandler'
+import ApiServices from '../Constants/APIHandler'
 import AddStudent from './AddStudent';
 import StudentsLayout from '../layouts/StudentsLayout'
 
@@ -10,12 +10,10 @@ import StudentsLayout from '../layouts/StudentsLayout'
 
 export default function StudentList() {
 
-    const DELETE_USER_API = 'http://localhost:9191/deleteStudent/'
-
     const [student, setStudent] = useContext(StudentContext)
 
     function removeStudent(id) {
-        deleter(DELETE_USER_API + id)
+        ApiServices.removeStudent(id)
             .then(res => {
                 setStudent(student.filter(stud => stud.id !== id))
             }

@@ -7,15 +7,12 @@ import { LoginContext } from '../LoginContext';
 import { Form } from 'react-bootstrap'
 
 
-import { putter, getter } from '../Constants/APIHandler'
+import ApiServices from '../Constants/APIHandler'
 
 import Alert from 'react-bootstrap/Alert';
 
 
 export default function UsersLayout({ username, password, usertype, removeUsers, userId }) {
-
-  const UPDATE_API = `http://localhost:9191/updateUser/`
-  const LOGIN_API = 'http://localhost:9191/login/users'
 
   const [, setUser] = useContext(LoginContext)
   const [isEditing, setEditing] = useState(false);
@@ -49,12 +46,13 @@ export default function UsersLayout({ username, password, usertype, removeUsers,
       }
       else {
         setErrorOption(false);
-        putter(UPDATE_API + `${userId}`, userUpdate)
+        ApiServices.updateUser(userId, userUpdate)
           .then(() => {
             setShow(true);
-            getter(LOGIN_API).then(res => {
-              setUser(res.data);
-            })
+            ApiServices.getUsers()
+              .then(res => {
+                setUser(res.data);
+              })
           })
         setEditing(false);
         setErrorOption(false);

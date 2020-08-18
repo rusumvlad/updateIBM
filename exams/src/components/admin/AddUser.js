@@ -7,7 +7,7 @@ import { Form, Container } from 'react-bootstrap'
 import Alert from 'react-bootstrap/Alert'
 
 
-import { adder, getter } from '../Constants/APIHandler'
+import ApiServices from '../Constants/APIHandler'
 
 
 
@@ -17,9 +17,6 @@ import { FaUserAlt, FaLock, FaUsers } from 'react-icons/fa';
 
 
 export default function AddUser() {
-
-    const ADD_USER_API = 'http://localhost:9191/login/addUser'
-    const USER_API = `http://localhost:9191/login/users`
 
     const [users, setUsers] = useContext(LoginContext);
     const [username, setUsername] = useState('');
@@ -62,12 +59,13 @@ export default function AddUser() {
                 else {
                     setErrorOption(false);
 
-                    adder(ADD_USER_API, user)
+                    ApiServices.addUser(user)
                         .then(() => {
                             setShow(true);
-                            getter(USER_API).then(res => {
-                                setUsers(res.data);
-                            })
+                            ApiServices.getUsers()
+                                .then(res => {
+                                    setUsers(res.data);
+                                })
                         })
                     setErrorOption(false);
                     setErrorEmpty(false);

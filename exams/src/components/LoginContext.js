@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { getter } from '../components/Constants/APIHandler'
+import ApiServices from '../components/Constants/APIHandler'
 export const isLoggedContext = createContext()
 export const LoginContext = createContext();
 export const CurrentUserContext = createContext();
@@ -8,20 +8,19 @@ export const StudentContext = createContext();
 
 export const LoginProvider = ({ children }) => {
 
-    const USERS_API = `http://localhost:9191/login/users`;
-    const STUDENTS_API = `http://localhost:9191/students`
-
     const [isLogged, setisLogged] = useState(false);
     const [users, setUser] = useState([]);
     const [currentUser, setCurrentUser] = useState('');
     const [student, setStudent] = useState([]);
     const listUser = () => {
-        getter(USERS_API).then(res => {
-            setUser(res.data);
-        })
-        getter(STUDENTS_API).then(res => {
-            setStudent(res.data);
-        })
+        ApiServices.getUsers()
+            .then(res => {
+                setUser(res.data);
+            })
+        ApiServices.getStudents()
+            .then(res => {
+                setStudent(res.data);
+            })
     };
     useEffect(() => {
         listUser();

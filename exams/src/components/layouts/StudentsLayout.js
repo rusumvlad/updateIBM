@@ -9,15 +9,13 @@ import { AiFillCalendar } from 'react-icons/ai';
 import { GoCalendar } from 'react-icons/go';
 import { FaSchool } from 'react-icons/fa';
 
-import { putter, getter } from '../Constants/APIHandler'
+import ApiServicecs from '../Constants/APIHandler'
 
 import Alert from 'react-bootstrap/Alert';
 
 
 export default function StudentsLayout({ name, faculty, yearOfStudy, removeStudent, studId }) {
 
-    const UPDATE_API = `http://localhost:9191/updateStudents/`
-    const LOGIN_API = 'http://localhost:9191/students'
 
     const [, setStudent] = useContext(StudentContext)
     const [isEditing, setEditing] = useState(false);
@@ -55,12 +53,13 @@ export default function StudentsLayout({ name, faculty, yearOfStudy, removeStude
             }
             else {
                 setErrorOption(false);
-                putter(UPDATE_API + `${studId}`, studentUpdate)
+                ApiServicecs.updateStudent(studId, studentUpdate)
                     .then(() => {
                         setShow(true);
-                        getter(LOGIN_API).then(res => {
-                            setStudent(res.data);
-                        })
+                        ApiServicecs.getStudents()
+                            .then(res => {
+                                setStudent(res.data);
+                            })
                     })
                 setEditing(false);
                 setErrorOption(false);

@@ -3,18 +3,16 @@ import { LoginContext } from '../LoginContext';
 import UsersLayout from '../layouts/UsersLayout';
 import AddUser from './AddUser';
 
-import { deleter } from '../Constants/APIHandler'
+import ApiServices from '../Constants/APIHandler'
 
 
 
 export default function UsersList() {
 
-    const DELETE_USER_API = 'http://localhost:9191/deleteUser/'
-
     const [users, setUsers] = useContext(LoginContext);
 
     function removeUser(id) {
-        deleter(DELETE_USER_API + id)
+        ApiServices.removeUser(id)
             .then(res => {
                 setUsers(users.filter(user => user.id !== id))
             }

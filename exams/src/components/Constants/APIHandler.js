@@ -1,4 +1,3 @@
-import Axios from "axios"
 import http from "./AxiosHTTP";
 
 /*Api for exams */
@@ -28,26 +27,43 @@ const updateStatusExam = (id, data) => {
 const removeExam = id => {
     return http.delete(`/deleteExam/${id}`)
 };
+/* Api Students */
+const getStudents = () => {
+    return http.get("/students");
+};
+
+const addStudent = data => {
+    return http.post('/addStudent', data);
+};
+
+const updateStudent = (id, data) => {
+    return http.put(`/updateStudents/${id}`, data);
+};
+
+const removeStudent = id => {
+    return http.delete(`/deleteStudent/${id}`)
+};
+
+/* Api Users */
+
+const getUsers = () => {
+    return http.get("/login/users");
+};
+
+const addUser = data => {
+    return http.post('/login/addUser', data);
+};
+
+const updateUser = (id, data) => {
+    return http.put(`/updateUser/${id}`, data);
+};
+
+const removeUser = id => {
+    return http.delete(`/deleteUser/${id}`)
+};
 
 
-function getter(url) {
-    return Axios.get(url)
-}
 
-function putter(url, param) {
-    return Axios.put(url, param)
-}
-
-function adder(url, param) {
-    return Axios.post(url, param)
-}
-
-
-function deleter(url) {
-    return Axios.delete(url)
-}
-
-export { getter, putter, adder, deleter }
 export default {
     getExams,
     filterFaculty,
@@ -55,5 +71,13 @@ export default {
     addExam,
     updateExams,
     updateStatusExam,
-    removeExam
+    removeExam,
+    getStudents,
+    addStudent,
+    updateStudent,
+    removeStudent,
+    getUsers,
+    addUser,
+    updateUser,
+    removeUser
 }
