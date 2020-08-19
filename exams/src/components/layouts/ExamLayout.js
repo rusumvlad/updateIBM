@@ -174,12 +174,12 @@ export default function ExamLayout({ idExam, materie, data, profesor, isAdmin, i
             </Form.Group>
 
             <Form.Group controlId="formBasicAcademicYear">
-              <Form.Label><GoPerson className="form-icons" />An academic</Form.Label>
+              <Form.Label><AiFillCalendar className="form-icons" />An academic</Form.Label>
               <Form.Control type="text" name='academicYear' value={AcademycYear} onChange={(e) => setAcademicYear(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formBasicDate">
-              <Form.Label><GoPerson className="form-icons" />Date</Form.Label>
+              <Form.Label><GoCalendar className="form-icons" />Date</Form.Label>
               <Form.Control type="text" name='date' value={Date} onChange={(e) => setDate(e.target.value)} />
             </Form.Group>
 

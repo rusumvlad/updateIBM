@@ -38,4 +38,7 @@
         padding-bottom: 5px;
         padding-right:5px;
 }
+.react-date-picker__wrapper{
+        border:none;
+}
 /* End of form design */

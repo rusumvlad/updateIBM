@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 
 import { ExamsContext } from '../ExamsContext'
-
+import DatePicker from 'react-date-picker'
 
 import { Form, Container } from 'react-bootstrap'
 
@@ -26,7 +26,7 @@ export default function AddExam() {
   const [nSeats, setNSeats] = useState('');
   const [course, setCourse] = useState('');
   const [teacher, setTeacher] = useState('');
-  const [date, setDate] = useState('');
+  const [datePick, setDatePick] = useState(new Date());
   const [academicYear, setAcademicYear] = useState('')
   const [show, setShow] = useState(false);
 
@@ -42,11 +42,20 @@ export default function AddExam() {
     let stringsOnly = /^[A-Za-z]+$/;
     return stringsOnly.test(strings);
   }
+  let dateNormal;
+  const datePickAll = () => {
+    let month = datePick.getMonth() + 1;
+    let day = datePick.getDate();
+    let year = datePick.getFullYear();
+    dateNormal = day + "/" + month + "/" + year;
+    return dateNormal;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    datePickAll()
     const exam = {
-      date: date,
+      date: dateNormal,
       yearOfStudy: yearOfStudy,
       semester: semester,
       academycYear: academicYear,
@@ -56,7 +65,7 @@ export default function AddExam() {
       professor: teacher,
       seats: nSeats
     };
-    if (date === '' || yearOfStudy === '' || semester === '' || academicYear === '' || faculty === '' || teacher === '' || course === '' || nSeats === '') {
+    if (datePick === '' || yearOfStudy === '' || semester === '' || academicYear === '' || faculty === '' || teacher === '' || course === '' || nSeats === '') {
       setErrorEmpty(true);
     } else {
       setErrorEmpty(false);
@@ -84,7 +93,7 @@ export default function AddExam() {
           setNSeats('');
           setCourse('');
           setTeacher('');
-          setDate('');
+          setDatePick('');
           setAcademicYear('');
         }
       }
@@ -150,8 +159,8 @@ export default function AddExam() {
           </Form.Group>
 
           <Form.Group controlId="formBasicDate">
-            <Form.Label><GoPerson className="form-icons" />Date</Form.Label>
-            <Form.Control type="text" name='date' value={date} onChange={(e) => setDate(e.target.value)} />
+            <Form.Label><GoPerson className="form-icons" />Date</Form.Label><br />
+            <DatePicker format="dd/MM/yyyy" className="form-control w-100" onChange={setDatePick} value={datePick} />
           </Form.Group>
 
           <div className='buttonProf'>

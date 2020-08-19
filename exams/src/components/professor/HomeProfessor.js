@@ -18,7 +18,7 @@ function HomeProfessor() {
             </div>
             <div className="row">
                 {exams.map((exam, index) =>
-                    exam.professor === currentUser && <ExamLayout materie={exam.course} data={exam.date} nrLocuri={exam.seats} key={index} isProfessor={true} />
+                    (exam.professor === currentUser && exam.status === "acceptat") && <ExamLayout materie={exam.course} data={exam.date} nrLocuri={exam.seats} key={index} isProfessor={true} />
                 )}
             </div>
         </div>

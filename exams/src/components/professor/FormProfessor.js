@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import DatePicker from 'react-date-picker'
 //Import bootstrap components
 import { Form, Container } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
@@ -20,11 +21,10 @@ function FormProfessor() {
   const [faculty, setFaculty] = useState('');
   const [nSeats, setNSeats] = useState('');
   const [course, setCourse] = useState('');
-  const [teacher, setTeacher] = useState(currentUser);
-  const [date, setDate] = useState('');
+  const [teacher] = useState(currentUser);
   const [academicYear, setAcademicYear] = useState('')
   const [show, setShow] = useState(false);
-
+  const [datePick, setDatePick] = useState(new Date());
   const [errorNumber, setErrorNumber] = useState(false);
   const [errorEmpty, setErrorEmpty] = useState(false);
   const [errorString, setErrorString] = useState(false);
@@ -37,11 +37,20 @@ function FormProfessor() {
     let stringsOnly = /^[A-Za-z]+$/;
     return stringsOnly.test(strings);
   }
+  let dateNormal;
+  const datePickAll = () => {
+    let month = datePick.getMonth() + 1;
+    let day = datePick.getDate();
+    let year = datePick.getFullYear();
+    dateNormal = day + "/" + month + "/" + year;
+    return dateNormal;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
+    datePickAll()
     const exam = {
-      date: date,
+      date: dateNormal,
       yearOfStudy: yearOfStudy,
       semester: semester,
       academycYear: academicYear,
@@ -51,8 +60,7 @@ function FormProfessor() {
       professor: teacher,
       seats: nSeats
     };
-
-    if (date === '' || yearOfStudy === '' || semester === '' || academicYear === '' || faculty === '' || teacher === '' || course === '' || nSeats === '') {
+    if (datePick === '' || yearOfStudy === '' || semester === '' || academicYear === '' || faculty === '' || teacher === '' || course === '' || nSeats === '') {
       setErrorEmpty(true);
     } else {
       setErrorEmpty(false);
@@ -75,8 +83,7 @@ function FormProfessor() {
           setFaculty('');
           setNSeats('');
           setCourse('');
-          setTeacher('');
-          setDate('');
+          setDatePick('');
           setAcademicYear('');
         }
       }
@@ -129,7 +136,7 @@ function FormProfessor() {
           </Form.Group>
 
           <Form.Group controlId="formBasicAcademicYear">
-            <Form.Label><GoPerson className="form-icons" />Academic Year</Form.Label>
+            <Form.Label><AiFillCalendar className="form-icons" />Academic Year</Form.Label>
             <Form.Control
               type="text"
               name='academicYear'
@@ -138,8 +145,8 @@ function FormProfessor() {
           </Form.Group>
 
           <Form.Group controlId="formBasicDate">
-            <Form.Label><GoPerson className="form-icons" />Date</Form.Label>
-            <Form.Control type="text" name='date' value={date} onChange={(e) => setDate(e.target.value)} />
+            <Form.Label><GoCalendar className="form-icons" />Date</Form.Label><br />
+            <DatePicker format="dd/MM/yyyy" className="form-control w-100" onChange={setDatePick} value={datePick} />
           </Form.Group>
 
           <div className='buttonProf'>
