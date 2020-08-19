@@ -8,6 +8,7 @@ import FormLogin from './components/FormLogin';
 import PageProfesor from './components/professor/pageProfesor';
 import PageStudent from './components/student/pageStudent';
 import PageAdmin from './components/admin/PageAdmin';
+import Page404 from './components/layouts/Page404';
 //Import Contexts
 import { ExamsProvider } from './components/ExamsContext';
 import { LoginProvider } from './components/LoginContext';
@@ -31,7 +32,7 @@ function App() {
             <PrivateRoute path={ROUTES.ADMINUSERSLIST} exact component={PageAdmin} />
             <PrivateRoute path={ROUTES.ADMINSTUDENTSLIST} exact component={PageAdmin} />
             <PrivateRoute path={ROUTES.ADMINPENDING} exact component={PageAdmin} />
-            <Route path={ROUTES.ERROR} exact component={() => '404 PAGE NOT FOUND!'} />
+            <Route path={ROUTES.ERROR} exact component={Page404} />
           </Switch>
 
         </div>
