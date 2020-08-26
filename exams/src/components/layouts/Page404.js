@@ -1,11 +1,6 @@
 import React from 'react'
 
 
-//import Icons
-import { FaIdCard, FaGlobe, FaPhoneAlt, FaFacebook, FaTwitterSquare } from 'react-icons/fa';
-import { IoMdMail } from 'react-icons/io';
-import { AiFillInstagram } from 'react-icons/ai';
-
 
 import notFound from '../../img/undraw_not_found_60pq.svg';
 import Navbar404 from './Navbar404';
