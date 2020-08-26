@@ -6,10 +6,10 @@ import { AiFillInstagram } from 'react-icons/ai';
 //Import css for Footer
 import '../../css/Footer.css';
 
-function Footer() {
+function Footer({ notFound }) {
     return (
         <div className="main-footer">
-            <div className="footer-middle">
+            <div className={`${notFound ? 'footer-notfound' : 'footer-middle'}`}>
                 <div className="container-fluid">
                     <div className="row text-center">
                         {/* Column 1 */}
